@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/styleMenu.css"/>
+    <title>Menu Principal</title>
+</head>
+<body>
+    <div class = "title">
+        <h1 class="text-xl-center font-weight-bold">MENU BARBEARIA</h1>
+    </div>
+
+    <div class = "tela">
+        <div class="col text-center">
+            <div th:if="${verifyBarbearia}">
+                <a href="/app/barbearia" class="btn btn-primary mr-1 btn-lg btn-block bBtn" role="button" >BARBEARIA</a>
+                <a href="/app/funcionarios" class="btn btn-primary btn-lg btn-block fBtn disabled" role="button">FUNCIONÁRIOS</a>
+                <a href="/app/clientes" class="btn btn-primary btn-lg btn-block cBtn disabled" role="button">CLIENTES</a>  
+                <a href="/app/servicos" class="btn btn-primary btn-lg btn-block sBtn disabled" role="button">SERVIÇOS</a>       
+                <a href="/app/agendamentos" class="btn btn-primary btn-lg btn-block aBtn disabled" role="button">AGENDAMENTOS</a>
+                <a href="/app/agendamentosHistorico" class="btn btn-primary btn-lg btn-block aBtn disabled" role="button">HISTÓRICO DE AGENDAMENTOS</a>  
+            </div>
+
+            <div th:unless="${verifyBarbearia}">
+                <a href="/app/barbearia" class="btn btn-primary mr-1 btn-lg btn-block bBtn" role="button" >BARBEARIA</a>
+                <a href="/app/funcionarios" class="btn btn-primary btn-lg btn-block fBtn" role="button">FUNCIONÁRIOS</a>
+                <a href="/app/clientes" class="btn btn-primary btn-lg btn-block cBtn" role="button">CLIENTES</a>  
+                <a href="/app/servicos" class="btn btn-primary btn-lg btn-block sBtn" role="button">SERVIÇOS</a>       
+                <a href="/app/agendamentos" class="btn btn-primary btn-lg btn-block aBtn" role="button">AGENDAMENTOS</a>
+                <a href="/app/agendamentosHistorico" class="btn btn-primary btn-lg btn-block aBtn" role="button">HISTÓRICO DE AGENDAMENTOS</a>  
+            </div>
+            
+        </div>
+    </div>
+
+    <div class = "autores">
+        <div class = "anotation">
+            <div class="text font-weight-bold">AUTORES</div>
+        </div>
+        <div class="text font-weight-bold">VINÍCIUS C. S. SOUZA - 180854</div>
+        <div class="text font-weight-bold">FRANCISCO G. NETO - 180141</div>
+    </div>
+    
+</body>
+</html>

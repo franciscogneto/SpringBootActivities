@@ -1,0 +1,10 @@
+body{
+	background:url(../jpg/barber-background.jpg) repeat center top fixed;
+	
+	background-blend-mode: overlay;
+	
+    -webkit-background-size:contain;
+    -moz-background-size:contain;
+    -o-background-size: contain;
+    background-size: contain;
+}

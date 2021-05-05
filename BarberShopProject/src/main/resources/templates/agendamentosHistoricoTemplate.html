@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" th:src="@{../js/mainAgendamento.js}" src="../static/js/mainAgendamento.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/styleTemplate.css"/>
+</head>
+
+<body>
+    <div class="container-fluid content-row">
+        <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-block">
+                    <br>
+                    <h1 class="text-xl-center font-weight-bold">HISTÓRICO DE AGENDAMENTOS</h1>
+                    <br>
+
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">CLIENTE</th>
+                                <th class="text-center">FUNCIONÁRIO</th>
+                                <th class="text-center">QUANTIDADE DE SERVIÇOS</th>
+                                <th class="text-center">DATA</th>
+                                <th class="text-center">HORÁRIO</th>
+                                <th class="text-center">HORÁRIO TÉRMINO</th>
+                                <th class="text-center">PREÇO TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="agendamento :${data.content}">
+                                <td th:text="${agendamento.id}"></td>
+                                <td class="text-truncate" style="max-width: 200px;"
+                                    th:text="${agendamento.cliente.id} + '-' + ${agendamento.cliente.nome}"></td>
+                                <td class="text-truncate" style="max-width: 200px;"
+                                    th:text="${agendamento.funcionario.id} + '-' + ${agendamento.funcionario.nome}">
+                                </td>
+                                <td th:text="${agendamento.servicos.size()}"></td>
+                                <td
+                                    th:text="${agendamento.horario.getDayOfMonth()}+'/'+${agendamento.horario.getMonth()}+'/'+${agendamento.horario.getYear()}">
+                                </td>
+                                <td th:text="${agendamento.getHorarioComeco()} + ' h'"></td>
+                                <td th:text="${agendamento.getHorarioTermino()} + ' h'"></td>
+                                <td th:text="'R$ ' + ${agendamento.total}"></td>
+                                <td>
+                                    <a th:href="@{'/app/detalhesAgendamento/' + ${2} + '/' + ${agendamento.id}}"
+                                        class="btn btn-success detBtn">Detalhes</a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <hr />
+                    <div class="col text-center">
+                        <a th:href="@{/}" method="post" class="btn btn-danger rBtn" role="button">Voltar</a>
+                    </div>
+                    <div th:if="${data.totalPages == 0}">
+                        <div class="text font-weight-bold">PÁGINAS</div>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages)}">
+                                <a th:href="@{/app/agendamentosHistorico(page=${i})}" th:text="${i}" class="nav-link"
+                                th:classappend="${currentPage}==${i}?'active':''"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:unless="${data.totalPages == 0}">
+                        <div class="text font-weight-bold">PÁGINAS</div>       
+                        <ul class="nav nav-pills">                
+                            <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">
+                                <a th:href="@{/app/agendamentosHistorico(page=${i})}" th:text="${i}" class="nav-link"
+                                th:classappend="${currentPage}==${i}?'active':''"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

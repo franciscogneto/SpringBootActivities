@@ -1,0 +1,75 @@
+body{
+	background:url(../jpg/barber-background.jpg) repeat center top fixed;
+	
+	background-blend-mode: overlay;
+	
+    -webkit-background-size:contain;
+    -moz-background-size:contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
+
+.title{
+	padding-top: 120px;
+    text-align: center;
+	font-weight: bold;
+	color: rgb(175, 28, 28);
+}
+.title h1{
+	font-size: 60px;
+}
+
+.autores{
+    position: absolute;
+    top: 90%; bottom: 0; left: 86%; right: 0;
+	margin: auto;
+	color: rgb(175, 28, 28);
+	font-size: 17px;
+}
+
+.anotation{
+	text-decoration: underline ;
+}
+
+.tela{
+	position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+	background-color:black;
+	color: black;
+	width: 400px;
+	height: 423px;
+	padding-top: 30px;
+	text-align: center;
+	border-radius: 20px;
+}
+.tela input{
+	display: block;
+	margin: 5px 0px 20px 130px;
+	width: 85%
+	padding 100px;
+	border-radius: 20px;
+	color: blue;
+}
+.tela label{
+	text-align: center;
+	display: block;
+	padding: 10px 10px 5px 15px;
+	font-size: 20px;
+	color: black;
+}
+
+.tela button{
+	display: block;
+	margin: 15px 0 0 auto;
+	font-family: 40px;
+	border: 4px;
+}
+
+.tela a{
+	margin: 15px 0 0 auto;
+	font-weight: bold;
+	font-family: 20px;
+	border: 4px;
+	color: black;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/styleTemplate.css"/>
+</head>
+<body>
+    <div class="container-fluid content-row">
+        <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-block">
+                    <br>
+                    <h1 class="text-xl-center font-weight-bold">DETALHES DA BARBEARIA</h1>
+                    <br>
+
+                    <div class="text-xl-center font-weight-bold">BARBEARIA</div>
+                    <br>
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">NOME</th>
+                                <th class="text-center">ENDEREÇO</th>
+                                <th class="text-center">TELEFONE</th>
+                                <th class="text-center">ABRE</th>
+                                <th class="text-center">FECHA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${barbearia.id}"></td>
+                                <td class="text-truncate" style="max-width: 200px;" th:text="${barbearia.nome}"></td>
+                                <td class="text-truncate" style="max-width: 250px;" th:text="${barbearia.endereco}"></td>
+                                <td th:text="${barbearia.telefone}"></td>
+                                <td th:text="${barbearia.hAbre} + ' h'"></td>
+                                <td th:text="${barbearia.hFecha} + ' h'"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="text-xl-center font-weight-bold">DETALHES EXTRAS</div>
+                    <br>
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-center">QTDE FUNCIONÁRIOS</th>
+                                <th class="text-center">QTDE CLIENTES</th>
+                                <th class="text-center">QTDE SERVIÇOS</th>
+                                <th class="text-center">QTDE AGENDAMENTOS ATIVOS</th>
+                                <th class="text-center">QTDE AGENDAMENTOS FINALIZADOS</th>
+                                <th class="text-center">VALOR TOTAL OBTIDO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${barbearia.funcionarios.size()}"></td>
+                                <td th:text="${barbearia.clientes.size()}"></td>
+                                <td th:text="${barbearia.servicos.size()}"></td>
+                                <td th:text="${agendamentos.size()}"></td>
+                                <td th:text="${agendamentosHistorico.size()}"></td>
+                                <td th:text="'R$ ' + ${valorTotal}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr/>
+                    <div class="col text-center">
+                        <a th:href="@{/}" method="post" class="btn btn-danger rBtn" role="button">Menu</a>
+                        <a th:href="@{/app/barbearia}" method="post" class="btn btn-danger rBtn" role="button">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
