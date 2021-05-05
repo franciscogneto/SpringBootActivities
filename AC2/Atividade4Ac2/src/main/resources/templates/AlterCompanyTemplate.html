@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edita Editora</title>
+</head>
+<body>
+    <h1>Alteração de Editoras</h1>
+    <a href="/">Menu</a>
+    <a href="/editoras">Editora</a>
+    <br>
+    <br>
+    
+    <form th:action="@{/salvaEditora}" th:object = "${editora}" method="POST">
+        <label>ID: </label><span th:text="${editora.id}"></span>
+        <br>
+        <input type="hidden" th:value="${editora.id}" th:field="${editora.id}" name="id"/>
+
+        <label>Nome:</label>
+        <input type="text" placeholder="Digite o nome" th:value="${editora.name}" name="name" required/>
+        <label>Endereço:</label>
+        <input type="text" placeholder="Digite o endereço" th:value="${editora.adress}" name="adress"required/>
+        <label>Ano de fundacao:</label>
+        <input type="number" placeholder="Digite o ano" th:value="${editora.year_foundation}" name="year_foundation" min="1800" max="2020" required/>
+        <input type="submit" value="Salvar"/>
+    </form>
+    <br>
+    <br>
+    
+</body>
+</html>

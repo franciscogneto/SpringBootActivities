@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product View</title>
+</head>
+<body>
+    <h1>Product View</h1>   
+    <!-- IF  PRODUCT IS VALID-->
+    <div th:if="${prod}">
+        <p th:text="${prod?.id}"></p>
+        <p th:text="${prod?.name}"></p>
+        <p th:text="${prod?.price}"></p>
+        <p th:text="${prod?.stock}"></p>
+    </div>
+    <!-- ELSE -->
+    <div th:unless="${prod}">
+        <div>ERROR: INVALID PRODUCT!</div>
+    </div>
+</body>
+</html>

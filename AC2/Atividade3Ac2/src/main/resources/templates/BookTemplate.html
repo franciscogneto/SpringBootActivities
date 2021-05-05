@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro</title>
+</head>
+<body>
+    <h1>Cadastro de Livros</h1>
+    <a href="/">Menu</a>
+    <a href="/autores">Livro</a>
+    <a href="/editoras">Editoras</a>
+    <br>
+    <br>
+    <br>
+    <form th:action="@{/salvaLivro}" th:object="${livro}" method="POST">
+    <label>Título:</label>
+    <input  type="text" placeholder="Digite o título do livro" name="title" required/>
+    <label>Sub-título:</label>
+    <input  type="text" placeholder="Digite o sub-título do livro" name="sub_title" required/>
+    <label>Valor:</label>
+    <input type="number" placeholder="Digite o valor do livro" name="value" min="0" required>
+
+    <label>Editoras:</label>
+    <select th:field="${livro.publishing_company}" required>
+        <option value="">Escolha a editora</option>
+        <option th:each="editora: ${editoras}"
+                    th:value="${editora.id}"
+                    th:text="${editora.name}"
+        >
+        </option>
+    </select>
+
+    <input type="submit" value="Salvar">
+    </form>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Sub-título</th>
+            <th>Valor</th>
+            <th>Editora</th>
+            <th>Link para os detalhes do livro</th>
+        </tr>
+        <tr th:each="livro : ${livros}">
+        <td th:text="${livro.id}"></td>
+        <td th:text="${livro.title}"></td>
+        <td th:text="${livro.sub_title}"></td>
+        <td th:text="${livro.value}"></td>
+        <td th:text="${livro.publishing_company?.name}"></td>
+        <td><a th:href="@{'/detalhesLivro/' + ${livro.id}}">Detalhes</a></td>
+        </tr>
+    </table>
+</body>
+</html>

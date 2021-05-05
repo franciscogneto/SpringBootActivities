@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<atividade3_francisco_godinho_neto_180141>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.atividade3_francisco_godinho_neto_180141.DemoApplication",
+            "projectName": "atividade3_francisco_godinho_neto_180141",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<atividade4_francisco_godinho_neto_180141>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.atividade3_francisco_godinho_neto_180141.DemoApplication",
+            "projectName": "atividade4_francisco_godinho_neto_180141",
+            "args": ""
+        }
+    ]
+}

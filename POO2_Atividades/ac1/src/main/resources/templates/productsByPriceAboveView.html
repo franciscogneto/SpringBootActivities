@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products By Price Above View</title>
+</head>
+<body>
+    <h1>Products By Price Above View</h1>
+    <!-- IF THERE ARE PRODUCTS PRICED ABOVE-->
+    <div th:unless="${#lists.isEmpty(prods)}">
+        <table>
+            <tr th:each="prod: ${prods}">
+                <td th:text="${prod.id}" />
+                <td th:text="${prod.name}" />
+                <td th:text="${prod.price}" />
+                <td th:text="${prod.stock}" />
+            </tr>
+        </table>
+    </div>
+    <!-- ELSE -->
+    <div th:if="${#lists.isEmpty(prods)}">
+        <div>WARNING: NO PRODUCT PRICED ABOVE!</div>
+    </div>      
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product In Stock View</title>
+</head>
+<body>
+    <h1>Product In Stock View</h1>
+    <!-- IF THERE ARE PRODUCTS IN STOCK-->
+    <div th:unless="${#lists.isEmpty(prods)}">
+        <table>
+            <tr th:each="prod: ${prods}">
+                <td th:text="${prod.id}" />
+                <td th:text="${prod.name}" />
+                <td th:text="${prod.price}" />
+                <td th:text="${prod.stock}" />
+            </tr>
+        </table>
+    </div>
+    <!-- ELSE -->
+    <div th:if="${#lists.isEmpty(prods)}">
+        <div>WARNING: NO PRODUCT IN STOCK!</div>
+    </div>      
+</body>
+</html>

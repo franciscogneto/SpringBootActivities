@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register And Funcionarios View</title>
+</head>
+<body>
+    <h1>CADASTRO DE FUNCIONÁRIO</h1>
+
+    <form th:action="@{/app/cadastro}" method="POST">
+        <input type="text" placeholder="Nome" name="nome" required />
+        <input type="text" placeholder="CPF" name="cpf" required />
+        <input type="text" placeholder="Departamento" name="Departamento" required />
+        <input type="number" placeholder="Salário (R$)" step="0.01" name="salario" required />
+        <input type="submit" value="Register" />
+    </form>
+
+    <br>
+    <br>
+
+    <div th:unless="${verify}">
+        <div width:100px>AVISO: CADASTRO INVÁLIDO! </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Código CSS -->
+    <style>
+    .alinhadoCentro {text-align:center;} 
+    .textoRealce-D {color:rgb(0, 0, 0);}
+    
+    td {padding: 8px}
+    </style>
+
+    <h1>LISTA DE FUNCIONÁRIOS</h1>
+
+    <!-- IF THERE ARE 'FUNCIONÁRIOS' IN REPOSITORY-->
+    <div th:unless="${#lists.isEmpty(funcionarios)}">
+        <table cellspacing="6">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>CPF</th>
+            <th>DEPARTAMENTO</th>
+            <th>SALÁRIO</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="funcionario: ${funcionarios}">
+                <td th:text="${funcionario.id}" class="alinhadoCentro"></td>
+                <td th:text="${funcionario.nome}" class="alinhadoCentro"></td>
+                <td th:text="${funcionario.cpf}" class="alinhadoCentro"></td>
+                <td th:text="${funcionario.departamento}" class="alinhadoCentro"></td>
+                <td th:text="${#numbers.formatCurrency(funcionario.salario)}" class="alinhadoCentro"></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <!-- ELSE -->
+    <div th:if="${#lists.isEmpty(funcionarios)}">
+        <div>AVISO: NENHUM FUNCIONÁRIO CADASTRADO!</div>
+    </div>  
+    
+</body>
+</html>

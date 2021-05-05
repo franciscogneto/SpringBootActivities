@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{../js/mainEditora.js}" src="../static/js/mainEditora.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styleForm.css"/>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-block">
+
+                <div th:if="${verifyEdit}">
+                    <!-- Edit Error Alert -->
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Erro!</strong> Editora não pôde ser editada.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div th:if="${verifyDelete}">
+                    <!-- Delete Error Alert -->
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Erro!</strong> Editora não pôde ser deletada.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+                <h1 class="text-xl-center font-weight-bold">EDITORAS</h1>
+                <br>
+
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">NOME</th>
+                            <th class="text-center">EMAIL</th>
+                            <th class="text-center">QUANTIDADE DE LIVROS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="editora :${data.content}">
+                            <td th:text="${editora.id}"></td>
+                            <td class="text-truncate" style="max-width: 200px;" th:text="${editora.nome}"></td>
+                            <td th:text="${editora.email}"></td>
+                            <td th:text="${editora.livros.size()}"></td>
+                            <td>
+                                <a th:href="@{'/app/detalhesEditora/' + ${editora.id}}" class="btn btn-success detBtn">Detalhes</a>
+                                <a th:href="@{findOneEditora/(id=${editora.id})}" class="btn btn-primary eBtn">Edit</a>
+                                <a th:href="@{deleteEditora/(id=${editora.id})}" class="btn btn-danger delBtn">Delete</a>     
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <hr/>
+                <div class="col text-center">
+                    <a th:href="@{/}" method="post" class="btn btn-danger rBtn" role="button">Return</a>
+                    <button class="btn btn-success nBtn">New</button>
+                </div>
+                <div th:if="${data.totalPages == 0}">
+                    <div class="text font-weight-bold">PAGES</div>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages)}">
+                            <a th:href="@{/app/editoras(page=${i})}" th:text="${i}" class="nav-link"
+                            th:classappend="${currentPage}==${i}?'active':''"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div th:unless="${data.totalPages == 0}">
+                    <div class="text font-weight-bold">PAGES</div>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">
+                            <a th:href="@{/app/editoras(page=${i})}" th:text="${i}" class="nav-link"
+                            th:classappend="${currentPage}==${i}?'active':''"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="editForm">
+            <form th:action="@{/app/salvarEditora}" method="post">
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Update</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="id" class="col-form-label">ID:</label>
+                                <input type="text" class="form-control" id="id" name="id" value="" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="nome" class="col-form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" value="" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <input type="text" class="form-control" id="email" name="email" value="" required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="newForm">
+            <form th:action="@{/app/salvarEditora}" method="post">
+                <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="newModalLabel">Create</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nome" class="col-form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" value="" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <input type="text" class="form-control" id="email" name="email" value="" required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+                        Are you sure you want to delete this Publisher?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <a href="" class="btn btn-danger" id="delRef">Delete</a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

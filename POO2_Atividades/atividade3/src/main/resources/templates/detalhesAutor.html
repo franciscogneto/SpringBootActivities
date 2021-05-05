@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/styleForm.css"/>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-block">
+                <div class="text-xl-center font-weight-bold">AUTOR</div>
+                <br>
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">NOME</th>
+                            <th class="text-center">EMAIL</th>
+                            <th class="text-center">QUANTIDADE DE LIVROS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td th:text="${autor.id}"></td>
+                            <td class="text-truncate" style="max-width: 200px;" th:text="${autor.nome}"></td>
+                            <td th:text="${autor.email}"></td>
+                            <td th:text="${autor.livros.size()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            
+                <br>
+                <br>
+                <div class="text-xl-center font-weight-bold">LIVROS ASSOCIADOS</div>
+                <br>
+
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">NOME</th>
+                            <th class="text-center">EDITORA</th>
+                            <th class="text-center">QUANTIDADE DE AUTORES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="livro : ${autor.livros}">
+                            <td th:text="${livro.id}"></td>
+                            <td class="text-truncate" style="max-width: 200px;" th:text="${livro.nome}"></td>
+                            <td th:text="${livro.editora.nome}"></td>
+                            <td th:text="${livro.autores.size()}"></td>
+                            <td> <a th:href="@{'/app/detalhesLivro/' + ${livro.id}}" class="btn btn-primary detBtn">Detalhes</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr/>
+                <div class="col text-center">
+                    <a th:href="@{/}" method="post" class="btn btn-danger rBtn" role="button">Menu</a>
+                    <a th:href="@{/app/autores}" method="post" class="btn btn-danger rBtn" role="button">Return</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

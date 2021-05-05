@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros</title>
+</head>
+<body>
+    <h1>Detalhes Livro</h1>
+    <a href="/">Menu</a>
+    <a href="/livros">Livros</a>
+    <a href="/autores">Autores</a>
+    <br>
+    <br>
+    <b>Id Livro:</b> <span th:text="${livro.id}"></span><br>
+    <b>Título</b> <span th:text="${livro.title}"></span><br>
+    <b>Sub-ítulo</b> <span th:text="${livro.sub_title}"></span><br> 
+    <b>Valor</b> <span th:text="${livro.value}"></span><br>
+    <br>
+    <br>
+    <br>
+    Editora deste livro:
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Ano de fundação</th>
+            <th>Link para a Editora</th>
+        </tr>
+        <tr>
+            <td th:text="${livro.publishing_company.id}"></td>
+            <td th:text="${livro.publishing_company.name}"></td>
+            <td th:text="${livro.publishing_company.adress}"></td>
+            <td th:text="${livro.publishing_company.year_foundation}"></td>
+            <td><a th:href="@{'/detalhesEditora/' + ${livro.publishing_company.id}}">Clique aqui</a></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    Autores associados:
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Id Autor</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de aniversário</th>
+            <th>Link para o autor</th>
+        </tr>
+        <tr th:each="autor : ${livro.authors}">
+        <td th:text="${autor.id}"></td>
+        <td th:text="${autor.name}"></td>
+        <td th:text="${autor.email}"></td>
+        <td th:text="${autor.birth_date}"></td>
+        <td><a th:href="@{'/detalhesAutor/' + ${autor.id}}">Click aqui</a></td>
+        </tr>
+    </table>
+    <br>
+    <form th:action="@{/associaLivroAutor(codigoLivro=${livro.id})}" method="POST">
+        <label>Autores</label>
+        <select name="id" required>
+            <option value="">Escolha autor</option>
+            <option th:each="autor : ${autores}"
+                        th:value="${autor.id}"
+                        th:text="${autor.name}"
+            >
+            </option>
+        </select>
+        <input type="submit" value="Associar autor">
+    </form>
+</body>
+</html>

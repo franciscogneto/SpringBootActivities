@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro</title>
+</head>
+<body>
+    <h1>Alteração de Livro</h1>
+    <a href="/">Menu</a>
+    <a href="/livros">Livros</a>
+    <br>
+    <br>
+    
+    <form th:action="@{/salvaLivro}" th:object="${livro}" method="POST">
+    <label>ID</label> <span th:text="${livro.id}"></span>
+    <br>
+    <input type="hidden" th:value="${livro.id}" th:field="${livro.id}" name="id">
+
+    <label>Título:</label>
+    <input  type="text" placeholder="Digite o título do livro" th:value="${livro.title}" name="title" required/>
+    <label>Sub-título:</label>
+    <input  type="text" placeholder="Digite o sub-título do livro" th:value="${livro.sub_title}" name="sub_title" required/>
+    <label>Valor:</label>
+    <input type="number" placeholder="Digite o valor do livro" th:value="${livro.value}" name="value" min="0" required>
+
+    <label>Editoras:</label>
+    <select th:field="${livro.publishing_company}" required>
+        <option value="">Escolha a editora</option>
+        <option th:each="editora: ${editoras}"
+                    th:value="${editora.id}"
+                    th:text="${editora.name}"
+        >
+        </option>
+    </select>
+    <input type="submit" value="Salvar">
+    </form>
+    <br>
+    Autores associados a este livro:
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Id Autor</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de aniversário</th>
+            <th>Desassociar</th>
+        </tr>
+        <tr th:each="autor : ${livro.authors}">
+        <td th:text="${autor.id}"></td>
+        <td th:text="${autor.name}"></td>
+        <td th:text="${autor.email}"></td>
+        <td th:text="${autor.birth_date}"></td>
+        <td><a th:href="@{/desassociaLivroAutor(codigoLivro=${livro.id},codigoAutor=${autor.id})}">Desassociar</a></td>
+        </tr>
+    </table>
+    <br>
+    Autores não associados a este livro:
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Id Autor</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de aniversário</th>
+            <th>Associar</th>
+        </tr>
+        <tr th:each="autor : ${autores}">
+        <td th:text="${autor.id}"></td>
+        <td th:text="${autor.name}"></td>
+        <td th:text="${autor.email}"></td>
+        <td th:text="${autor.birth_date}"></td>
+        <td><a th:href="@{/associaLivroAutor2(codigoLivro=${livro.id},codigoAutor=${autor.id})}">Associar</a></td>
+        </tr>
+    </table>
+    <br>
+</body>
+</html>

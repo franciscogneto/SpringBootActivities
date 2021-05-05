@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastra Editora</title>
+</head>
+<body>
+    <h1>Cadastro de Editoras</h1>
+    <a href="/">Menu</a>
+    <a href="/livros">Livros</a>
+    <br>
+    <br>
+    <br>
+    <form th:action="@{/salvaEditora}" method="POST">
+        <label>Nome:</label>
+        <input type="text" placeholder="Digite o nome" name="name" required/>
+        <label>Endereço:</label>
+        <input type="text" placeholder="Digite o endereço" name="adress"required/>
+        <label>Ano de fundacao:</label>
+        <input type="number" placeholder="Digite o ano" name="year_foundation" min="1800" max="2020" required/>
+        <input type="submit" value="Salvar"/>
+    </form>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Nome</td>
+            <td>Endereço</td>
+            <td>Ano de fundacao</td>
+            <td>Remover</td>
+            <td>Editar</td>
+            <td>Livros</td>
+        </tr>
+        <tr th:each="editora: ${editoras}">
+            <td th:text="${editora.id}"></td>
+            <td th:text="${editora.name}"></td>
+            <td th:text="${editora.adress}"></td>
+            <td th:text="${editora.year_foundation}"></td>
+            <td><a th:href="@{'/removeEditora?id=' + ${editora.id}}">Remover</a></td>
+            <td><a th:href="@{'/alteraEditora?id=' + ${editora.id}}">Editar</a></td>
+            <td><a th:href="@{'/detalhesEditora/' + ${editora.id}}">Livros</a></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <span th:if="${mensagem}">Erro na remoção ou esta editora possui livros !!</span>
+</body>
+</html>

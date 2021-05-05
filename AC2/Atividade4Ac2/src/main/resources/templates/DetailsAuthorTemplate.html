@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autores</title>
+</head>
+<body>
+    <h1>Detalhes Autor</h1>
+    <a href="/">Menu</a>
+    <a href="/autores">Autores</a>
+    <br>
+    <br>
+    <b>Id Ator:</b> <span th:text="${autor.id}"></span><br>
+    <b>Nome do Autor:</b> <span th:text="${autor.name}"></span><br>
+    <b> Email: </b> <span th:text="${autor.email}"></span><br>
+    <b>Data de aniversário: </b> <span th:text="${autor.birth_date}"></span><br>
+    <br>
+    <br>
+    <br>
+    Livros deste Autor(a):
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Sub-título</th>
+            <th>Valor</th>
+            <th>Link para o livro</th>
+        </tr>
+        <tr th:each="livro : ${livros}">
+        <td th:text="${livro.id}"></td>
+        <td th:text="${livro.title}"></td>
+        <td th:text="${livro.sub_title}"></td>
+        <td th:text="${livro.value}"></td>
+        <td><a th:href="@{'/detalhesLivro/' + ${livro.id}}">Click aqui</a></td>
+        </tr>
+    </table>
+</body>
+</html>

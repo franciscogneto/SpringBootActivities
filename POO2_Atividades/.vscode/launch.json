@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<ac1_09032020>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.ac1_09032020.DemoApplication",
+            "projectName": "ac1_09032020",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<atividade02_ac1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.atividade02_ac1.DemoApplication",
+            "projectName": "atividade02_ac1",
+            "args": ""
+        }
+    ]
+}

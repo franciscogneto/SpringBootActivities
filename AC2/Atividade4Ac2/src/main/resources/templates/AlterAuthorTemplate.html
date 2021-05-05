@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <title>Autor</title>
+</head>
+<body>
+    <h1>Alteração de Autores</h1>    
+    <a href="/">Menu</a>
+    <a href="/autores">Autor</a>
+    <br>
+    <br>
+    <br>
+    <form th:action="@{/salvaAutor}" th:object="${autor}" method="POST">
+        <label>ID: </label> <span th:text = "${autor.id}"></span>
+        <br>
+        <input type="hidden" th:value="${autor.id}" th:field="${autor.id}" name="id">
+
+        <label>Nome:</label><input type="text" placeholder="Digite o nome" th:value="${autor.name}" name="name" required/>
+        <label>Email:</label><input type="email" placeholder="Digite seu email" th:value="${autor.email}" name="email" require]>
+        <label>Data de nascimento</label><input type="date" placeholder="dd/mm/aaaa" th:value="${autor.birth_date}" name="birth_date" min="1910-01-01" required>
+        <input type="submit" value="Salvar" />
+    </form>
+    <br>
+    <br>
+</body>
+</html>
